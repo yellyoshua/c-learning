@@ -104,30 +104,10 @@ n0.addEventListener("click", function () {
 // del componenente "resultados"
 
 var operations = {
-    "+": function (a, b) {
-        var total = 0;
-        for (i = 0; i < arguments.length; i++) {
-            total += arguments[i];
-        }
-        return total;
-    },
-    "*": function () {
-        var total = 0;
-        for (i = 0; i < arguments.length; i++) {
-            total *= arguments[i];
-        }
-        return total;
-    },
-    "/": function () {
-        var total = 0;
-        for (i = 0; i < arguments.length; i++) {
-            total += arguments[i];
-        }
-        return total / (arguments.length - 1);
-    },
-    sqrt: function (a) {
-        return Math.sqrt(a);
-    }
+    "+": hacerSumar,
+    "*": hacerMultiplicacion,
+    "/": hacerDivisio,
+    sqrt: hacerRaiz
 };
 
 function resolverOperaciones() {
@@ -144,34 +124,17 @@ function resolverOperaciones() {
     let valorAnterior = ""
 
     listaOperaciones.forEach(function (valor, index) {
-        const isANumber = Number(valor) !== NaN;
 
-        // Validando que el valor anterior sea un numero
-        if ((Number(valorAnterior) !== NaN) && isANumber) {
+        let operation = operations[valor];
 
-        } else {
-
+        if (operation) {
+            return operation(valor)
         }
-
-        if (isANumber) {
-            listaNueva.push(Number(valor))
-        } else {
-
-        }
-
-        valorAnterior = index == 0 ? "" : listaOperaciones[index - 1]
     })
 
     console.log({ op, listaOperaciones })
 
     let resultado = 0;
-
-    // reduce 
-
-    // [[1], 2, 3, 4, 5]
-    //   c  
-
-    // current = actual
 
     return listaOperaciones.reduce(function (prev, current, list) {
 
@@ -188,7 +151,7 @@ resolver.addEventListener("click", resolverOperaciones)
 
 function hacerSumar() {
     let total = 0;
-    
+
     for (let i = 0; i < arguments.length; i++) {
         total += arguments[i];
     }
@@ -201,19 +164,36 @@ function hacerSumar() {
 function hacerRestar() {
     let total = 0;
 
-    for (let i = 0; )
+    for (let i = 0; i < arguments.lenght; i++) {
+        total -= arguments[i];
+    }
+
+    return total;
+
     return numero1 - numero2
 }
 
 function hacerMultiplicacion() {
+    let total = 0;
+
+    for (let i = 0; i < arguments.lenght; i++) {
+        total *= arguments[i];
+    }
+
+    return total;
+
     return numero1 * numero2
 }
 
 function hacerDivisio() {
-    return numero1 / numero2
+    let total = 0;
+    for (i = 0; i < arguments.length; i++) {
+        total += arguments[i];
+    }
+    return total / (arguments.length - 1);
 }
 
-function hacerRaiz() {
+function hacerRaiz(numero1) {
     return Math.sqrt(numero1)
 }
 
